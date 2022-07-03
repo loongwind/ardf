@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.loongwind.ardf.demo.RecycleViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_weight="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/add_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:data="@{viewModel.data}"
+            app:itemLayout="@{@layout/layout_item}"/>
+
+        <Button
+            android:id="@+id/add_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintRight_toLeftOf="@id/del_item"
+            android:text="添加item"
+            android:onClick="@{()->viewModel.addItem()}"/>
+
+
+        <Button
+            android:id="@+id/del_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/add_item"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/add_item"
+            android:layout_marginEnd="20dp"
+            android:text="删除item"
+            android:onClick="@{()->viewModel.deleteItem()}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
