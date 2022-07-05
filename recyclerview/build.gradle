@@ -49,6 +49,27 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
 
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.source
+}
+
+task javadocs(type: Javadoc) {
+    source = 'src/main/java/null'
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    excludes = ['**/*.kt']
+}
+
+task javadocJar(type: Jar, dependsOn: javadocs) {
+    archiveClassifier.set('javadoc')
+    from javadocs.destinationDir
+}
+
+artifacts {
+    archives androidSourcesJar
+    archives javadocJar
+}
+
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('maven.properties').newDataInputStream())
@@ -94,7 +115,9 @@ publishing {
                     url = properties.getProperty('POM_ISSUE_MANAGEMENT_URL')
                 }
             }
-            artifact  './build/outputs/aar/recyclerview-release.aar'
+            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+            artifact androidSourcesJar
+            artifact javadocJar
         }
     }
     repositories {
