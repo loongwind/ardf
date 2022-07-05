@@ -44,7 +44,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
-    implementation project(path: ':recycleview')
+    implementation 'com.loongwind.ardf:recyclerview:0.0.6-SNAPSHOT'
+//    implementation project(path: ':recyclerview')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
