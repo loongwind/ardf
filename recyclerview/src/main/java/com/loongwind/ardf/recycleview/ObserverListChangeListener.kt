@@ -31,5 +31,4 @@ class ObserverListChangeListener<T>(private val adapter:  RecyclerView.Adapter<*
         adapter.notifyItemRangeChanged(positionStart, itemCount)
     }
 
-
 }

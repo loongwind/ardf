@@ -78,11 +78,11 @@ publishing {
     publications {
         maven(MavenPublication) {
             groupId properties.getProperty('GROUP_ID') //开通maven central时候定义的
-            artifactId 'recyclerview' //资源名称
+            artifactId 'recyclerview-ext' //资源名称
             version properties.getProperty('VERSION_NAME') //版本名称
             pom {
-                name = 'recyclerview'
-                description = 'recyclerview'
+                name = 'recyclerview-ext'
+                description = 'recyclerview extension'
                 url =  properties.getProperty('POM_URL')
                 inceptionYear =  properties.getProperty('POM_INCEPTION_YEAR')
 

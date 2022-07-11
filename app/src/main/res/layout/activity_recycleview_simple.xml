@@ -4,6 +4,7 @@
 
     <data>
 
+        <!--  通过 DataBinding 接收 ViewModel 实例  -->
         <variable
             name="viewModel"
             type="com.loongwind.ardf.demo.RecycleViewModel" />

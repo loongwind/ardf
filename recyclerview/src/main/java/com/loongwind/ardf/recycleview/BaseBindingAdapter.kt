@@ -17,18 +17,26 @@ abstract class BaseBindingAdapter<T:Any, BINDING : ViewDataBinding> :
     var itemViewTypeCreator: ItemViewTypeCreator? = null
     var itemEventHandler : Any? = null
 
+    /**
+     * 列表数据
+     */
     var data: List<T>? = null
         @SuppressLint("NotifyDataSetChanged")
         set(data) {
             field = data
-            //如果是ObservableList则为其添加changeCallback
+            // 判断如果是 ObservableList 类型，则为其添加 changeCallback 回调
             if (data is ObservableList<*>) {
+                // 如果 listener 为空则创建 ObserverListChangeListener 对象，传入当前 Adapter
                 if (listener == null) {
                     listener = ObserverListChangeListener(this)
                 }
+                // 将已添加的 listener 移除，防止添加多个导致重复回调
                 (data as ObservableList<T>).removeOnListChangedCallback(listener)
+
+                // 设置 List 数据改变回调
                 data.addOnListChangedCallback(listener)
             }
+            // 刷新界面数据
             notifyDataSetChanged()
         }
 
@@ -75,7 +83,19 @@ abstract class BaseBindingAdapter<T:Any, BINDING : ViewDataBinding> :
     }
 
     interface ItemViewTypeCreator{
+        /**
+         * 通过 item 下标和数据返回布局类型
+         * @param position item 下标
+         * @param item item 数据
+         * @return item 布局类型
+         */
         fun getItemViewType(position: Int, item: Any?) : Int
+
+        /**
+         * 通过 item 布局类型返回布局资源 id
+         * @param viewType item 数据类型
+         * @return item 布局资源 id
+         */
         fun getItemLayout(viewType: Int) : Int
     }
 
