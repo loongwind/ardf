@@ -6,7 +6,7 @@
 
         <!--  通过 DataBinding 接收 ViewModel 实例  -->
         <variable
-            name="viewModel"
+            name="vm"
             type="com.loongwind.ardf.demo.RecycleViewModel" />
 
     </data>
@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/add_item"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:data="@{viewModel.data}"
+            app:data="@{vm.data}"
             app:itemLayout="@{@layout/layout_item}"/>
 
         <Button
@@ -35,7 +35,7 @@
             android:layout_marginBottom="20dp"
             app:layout_constraintRight_toLeftOf="@id/del_item"
             android:text="添加item"
-            android:onClick="@{()->viewModel.addItem()}"/>
+            android:onClick="@{()->vm.addItem()}"/>
 
 
         <Button
@@ -47,7 +47,7 @@
             app:layout_constraintLeft_toRightOf="@id/add_item"
             android:layout_marginEnd="20dp"
             android:text="删除item"
-            android:onClick="@{()->viewModel.deleteItem()}"/>
+            android:onClick="@{()->vm.deleteItem()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

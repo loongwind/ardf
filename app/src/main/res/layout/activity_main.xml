@@ -5,8 +5,10 @@
 
     <data>
         <variable
-            name="text"
-            type="String" />
+            name="vm"
+            type="com.loongwind.ardf.demo.MainViewModel" />
+
+        <import type="com.loongwind.ardf.demo.MainViewModel"/>
 
     </data>
 
@@ -23,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="简单使用"
+            android:onClick="@{()->vm.onClick(MainViewModel.EVENT_SIMPLE)}"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
@@ -30,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="item点击事件"
+            android:onClick="@{()->vm.onClick(MainViewModel.EVENT_ITEM_CLICK)}"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
@@ -37,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="item内部点击事件"
+            android:onClick="@{()->vm.onClick(MainViewModel.EVENT_ITEM_EVENT)}"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
@@ -44,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="多类型item view"
+            android:onClick="@{()->vm.onClick(MainViewModel.EVENT_MULTI_ITEM_VIEW)}"
             app:layout_constraintTop_toTopOf="parent"/>
 
 

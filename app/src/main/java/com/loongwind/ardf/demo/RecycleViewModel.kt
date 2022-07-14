@@ -1,8 +1,9 @@
 package com.loongwind.ardf.demo
 
 import androidx.databinding.ObservableArrayList
+import com.loongwind.ardf.base.BaseViewModel
 
-class RecycleViewModel(var view: IView){
+class RecycleViewModel : BaseViewModel(){
     val data = ObservableArrayList<String>()
 
     init {
@@ -14,7 +15,7 @@ class RecycleViewModel(var view: IView){
 
     fun onItemClick(item:Any?){
         if(item is String){
-            view.toast(item)
+            postHintText(item)
         }
     }
 

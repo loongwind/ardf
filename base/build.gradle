@@ -25,13 +25,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
     buildFeatures {
         dataBinding true
     }
@@ -39,11 +38,16 @@ android {
 
 dependencies {
 
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    api "io.insert-koin:koin-core:3.2.0"
+    api "io.insert-koin:koin-android:3.2.0"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
+
+
 
 task androidSourcesJar(type: Jar) {
     archiveClassifier.set('sources')
@@ -74,11 +78,11 @@ publishing {
     publications {
         maven(MavenPublication) {
             groupId properties.getProperty('GROUP_ID') //开通maven central时候定义的
-            artifactId 'recyclerview-ext' //资源名称
+            artifactId 'base' //资源名称
             version properties.getProperty('VERSION_NAME') //版本名称
             pom {
-                name = 'recyclerview-ext'
-                description = 'recyclerview extension'
+                name = 'base'
+                description = 'base framework'
                 url =  properties.getProperty('POM_URL')
                 inceptionYear =  properties.getProperty('POM_INCEPTION_YEAR')
 
@@ -146,4 +150,3 @@ publishing {
 signing {
     sign publishing.publications.maven //签名配置
 }
-

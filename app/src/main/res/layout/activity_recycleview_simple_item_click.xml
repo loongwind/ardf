@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="vm"
             type="com.loongwind.ardf.demo.RecycleViewModel" />
 
     </data>
@@ -20,9 +20,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:data="@{viewModel.data}"
+            app:data="@{vm.data}"
             app:itemLayout="@{@layout/layout_item_click}"
-            app:itemClick="@{(item,position)-> viewModel.onItemClick(item)}"/>
+            app:itemClick="@{(item,position)-> vm.onItemClick(item)}"/>
 
 
 

@@ -1,9 +1,10 @@
 package com.loongwind.ardf.demo
 
 import androidx.databinding.ObservableArrayList
+import com.loongwind.ardf.base.BaseViewModel
 import com.loongwind.ardf.recycleview.BaseBindingAdapter
 
-class MultiItemViewModel(var view: IView){
+class MultiItemViewModel : BaseViewModel(){
     // List 的 item 数据类型改为 Any
     val data = ObservableArrayList<Any>()
     // 定义多 item 布局类型的创建器
@@ -43,10 +44,10 @@ class MultiItemViewModel(var view: IView){
 
     fun onItemClick(item:Any?){
         if(item is String){
-            view.toast(item)
+            postHintText(item)
         }
         if(item is User){
-            view.toast(item.name)
+            postHintText(item.name)
         }
     }
 
@@ -59,6 +60,6 @@ class MultiItemViewModel(var view: IView){
     }
 
     fun omImgClick(user: User){
-        view.toast("Click Image ${user.name}")
+        postHintText("Click Image ${user.name}")
     }
 }
