@@ -1,21 +1,14 @@
 package com.loongwind.ardf.base
 
 
-import android.app.Activity
-import androidx.activity.ComponentActivity
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelStoreOwner
 import com.loongwind.ardf.base.event.OnEventListener
 import com.loongwind.ardf.base.ext.bind
 import com.loongwind.ardf.base.utils.getViewModel
-import com.loongwind.ardf.base.utils.getViewModelType
-import com.loongwind.ardf.base.utils.injectViewModel
 import org.koin.android.ext.android.getKoinScope
-import org.koin.androidx.viewmodel.ext.android.getViewModelFactory
 import org.koin.core.annotation.KoinInternalApi
 import org.koin.core.scope.Scope
-import java.lang.Exception
 
 /**
  * @Description: Databinding + ViewModel BaseFragment
