@@ -14,23 +14,13 @@ import com.loongwind.ardf.base.event.Event
  */
 open class BaseViewModel: ViewModel() {
     var isLoading = MutableLiveData<Boolean>()
+    // 提示文字
     var hintText = MutableLiveData<Event<String>>()
+    // 提示文字资源
     var hintTextRes = MutableLiveData<Event<Int>>()
 
+    // 事件
     var event = MutableLiveData<Event<Int>>()
-
-
-    fun getHintRes(): Int {
-        return hintTextRes.value?.getValueIfNotHandled() ?: 0
-    }
-
-    fun getEventId(): Int {
-        return event.value?.get()?:-1
-    }
-
-    fun getHintText(): String? {
-        return hintText.value?.getValueIfNotHandled()
-    }
 
     protected fun postHintText(msg: String) {
         hintText.value = Event(msg)
@@ -44,7 +34,9 @@ open class BaseViewModel: ViewModel() {
         event.value = Event(eventId)
     }
 
-
+    /**
+     * 返回事件
+     */
     fun back(){
         postEvent(EVENT_BACK)
     }

@@ -7,9 +7,11 @@ import com.loongwind.ardf.base.event.EVENT_BACK
 import com.loongwind.ardf.base.event.OnEventListener
 import com.loongwind.ardf.base.ext.bind
 import com.loongwind.ardf.base.utils.getViewModelType
+import com.loongwind.ardf.base.utils.injectViewModel
 import org.koin.android.ext.android.getKoinScope
 import org.koin.androidx.viewmodel.ext.android.getViewModelFactory
 import org.koin.core.annotation.KoinInternalApi
+import java.lang.Exception
 
 /**
  * @Description: Databinding + ViewModel BaseActivity
@@ -22,13 +24,15 @@ open class BaseBindingViewModelActivity<BINDING : ViewDataBinding, VM : BaseView
 
 
 
+    //创建 ViewModel 变量并延迟初始化
     val viewModel:VM by lazy {
         createViewModel()
     }
 
     override fun initDataBinding(binding: BINDING) {
-        //RDF 默认自动绑定 vm。具体业务实现中在实际的视图 xml 文件中声明当前视图的 ViewModel 为
-        // vm 即可自动进行绑定。
+        //绑定 viewModel
+        //绑定变量为 vm。
+        // 具体业务实现中在实际的布局 xml 文件中声明当前视图的 ViewModel 变量为 vm 即可自动进行绑定。
         binding.setVariable(BR.vm,viewModel)
 
     }
@@ -40,21 +44,18 @@ open class BaseBindingViewModelActivity<BINDING : ViewDataBinding, VM : BaseView
     }
 
     /**
-     *
      * @description 初始化 ViewModel 并自动进行绑定
-     * @param
-     * @return VM
-     *
+     * @return VM ViewModel 实例对象
      */
-    @OptIn(KoinInternalApi::class)
     private fun createViewModel():VM{
-        val viewModel = getViewModelType(javaClass)?.let {
-
-            val scope = getKoinScope()
-            val viewModelFactory = getViewModelFactory(this, it.kotlin, null, null, null, scope)
-            ViewModelLazy(it.kotlin, { viewModelStore }, { viewModelFactory} ).value as VM
+        try {
+            //注入 ViewModel，并转换为 VM 类型
+            val viewModel = injectViewModel() as VM
+            viewModel.bind(this)
+            return viewModel
+        }catch (e:Exception){
+            // 抛出异常
+            throw Exception("ViewModel is not inject", e)
         }
-        viewModel?.bind(this)
-        return viewModel!!
     }
 }

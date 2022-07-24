@@ -37,19 +37,22 @@ fun BaseViewModel.bind(fragment: BaseBindingViewModelFragment<*, *>) {
 
 
 fun  BaseViewModel.observe( owner: LifecycleOwner, context: Context?, onEvent: (Int) -> Unit){
+    // 订阅提示文字变化
     hintText.observe(owner){
-        val content = getHintText()
+        val content = hintText.value?.getValueIfNotHandled()
         if (!content.isNullOrBlank()) {
             context?.toast(content)
         }
     }
+    // 订阅提示文字资源变化
     hintTextRes.observe(owner) {
-        val contentRes = getHintRes()
+        val contentRes = hintTextRes.value?.getValueIfNotHandled() ?: -1
         if (contentRes > 0) {
             context?.toast(contentRes)
         }
     }
 
+    // 订阅事件变化
     event.observe(owner) {
         event.value?.getValueIfNotHandled()?.let {
             onEvent(it)

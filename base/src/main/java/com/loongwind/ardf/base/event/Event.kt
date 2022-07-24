@@ -9,20 +9,19 @@ package com.loongwind.ardf.base.event
  */
 class Event<T>(private val value: T) {
 
-    private var hasBeanHandled = false
+    //是否已被处理
+    private var handled = false
 
     /**
-     *
      * @description 防止粘性事件被多次消费，多个观察者场景下，只会被一个观察者消费
-     * @param
-     * @return
-     *
      */
     fun getValueIfNotHandled(): T? {
-        return if (hasBeanHandled) {
+        return if (handled) {
+            // 已处理返回 null
             null
         } else {
-            hasBeanHandled = true
+            // 标记为已处理
+            handled = true
             value
         }
     }

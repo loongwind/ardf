@@ -1,16 +1,21 @@
 package com.loongwind.ardf.base
 
 
+import android.app.Activity
 import androidx.activity.ComponentActivity
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelStoreOwner
 import com.loongwind.ardf.base.event.OnEventListener
 import com.loongwind.ardf.base.ext.bind
+import com.loongwind.ardf.base.utils.getViewModel
 import com.loongwind.ardf.base.utils.getViewModelType
+import com.loongwind.ardf.base.utils.injectViewModel
 import org.koin.android.ext.android.getKoinScope
 import org.koin.androidx.viewmodel.ext.android.getViewModelFactory
 import org.koin.core.annotation.KoinInternalApi
+import org.koin.core.scope.Scope
+import java.lang.Exception
 
 /**
  * @Description: Databinding + ViewModel BaseFragment
@@ -39,19 +44,25 @@ open class BaseBindingViewModelFragment<BINDING : ViewDataBinding, VM : BaseView
      */
     @OptIn(KoinInternalApi::class)
     private fun createViewModel():VM{
-        val viewModel = getViewModelType(javaClass)?.let {
 
-            val scope = getKoinScope()
-            val owner: ViewModelStoreOwner = if(isShareViewModel() && this.activity is ComponentActivity){
-                this.activity as ComponentActivity
-            }else{
-                this
-            }
-            val viewModelFactory = getViewModelFactory(owner, it.kotlin, null, null, null, scope)
-            ViewModelLazy(it.kotlin, { viewModelStore }, { viewModelFactory} ).value as VM
+        val scope : Scope?
+        val owner: ViewModelStoreOwner?
+
+        val activity = this.activity ?: throw Exception("Fragment Activity is null")
+        if(isShareViewModel()){
+            scope = activity.getKoinScope()
+            owner =  activity
+        }else{
+            scope = getKoinScope()
+            owner = this
         }
-        viewModel?.bind(this)
-        return viewModel!!
+        try {
+            val viewModel = getViewModel(javaClass, scope, owner, viewModelStore) as VM
+            viewModel.bind(this)
+            return viewModel
+        } catch (e: Exception) {
+            throw e
+        }
     }
 
     override fun onEvent(eventId: Int) {
@@ -63,7 +74,7 @@ open class BaseBindingViewModelFragment<BINDING : ViewDataBinding, VM : BaseView
      * @description 是否保持 ViewModel。默认创建与当前 Fragment 生命周期绑定的 ViewModel。
      * 重写此方法返回 true，则创建与当前 Fragment 宿主 Activity 生命周期绑定的 ViewModel，与当前
      * Activity 绑定的其他 Fragment 可共享该 ViewMoel
-     * @return true：保持 ViewModel 生命周期与宿主 Activity 同步，fasle：保持 ViewModel 与当前
+     * @return true：保持 ViewModel 生命周期与宿主 Activity 同步，false：保持 ViewModel 与当前
      * Fragment 生命周期同步
      *
      */

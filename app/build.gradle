@@ -44,9 +44,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
     implementation 'com.loongwind.ardf:recyclerview-ext:1.0.1'
-    implementation 'com.loongwind.ardf:base:1.0.1'
+//    implementation 'com.loongwind.ardf:base:1.0.1'
 //    implementation project(path: ':recyclerview')
-//    implementation project(path: ':base')
+    implementation project(path: ':base')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
