@@ -12,4 +12,5 @@ val appModule = module {
     viewModel{ RecycleViewModel()}
     viewModel{ MultiItemViewModel()}
     viewModel{ MainViewModel()}
+    viewModel{ TestViewModel()}
 }
