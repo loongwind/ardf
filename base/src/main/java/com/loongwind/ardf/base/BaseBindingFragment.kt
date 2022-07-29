@@ -14,7 +14,7 @@ import com.loongwind.ardf.base.utils.getBindingType
  * @CreateDate： 2020/8/4 11:46 PM
  *
  */
-abstract class BaseBindingFragment<BINDING:ViewDataBinding>: Fragment() {
+abstract class BaseBindingFragment<BINDING:ViewDataBinding>: BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //创建 ViewDataBinding 实例

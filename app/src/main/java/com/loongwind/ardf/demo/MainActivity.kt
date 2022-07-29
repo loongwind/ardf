@@ -1,9 +1,6 @@
 package com.loongwind.ardf.demo
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import com.loongwind.ardf.base.BaseBindingViewModelActivity
 import com.loongwind.ardf.demo.databinding.ActivityMainBinding
 

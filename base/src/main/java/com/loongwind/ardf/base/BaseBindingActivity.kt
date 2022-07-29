@@ -3,7 +3,6 @@ package com.loongwind.ardf.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import com.loongwind.ardf.base.utils.getBindingType
 
@@ -13,7 +12,7 @@ import com.loongwind.ardf.base.utils.getBindingType
  * @CreateDate： 2020/8/3 11:40 PM
  *
  */
-abstract class BaseBindingActivity<BINDING :ViewDataBinding>:AppCompatActivity() {
+abstract class BaseBindingActivity<BINDING :ViewDataBinding>:BaseActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

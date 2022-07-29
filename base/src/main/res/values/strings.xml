@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ardf_permission_request_hint">应用需要相关权限才能正常使用，点击确定进行授权！</string>
+    <string name="ardf_permission_default_denied_hint">无相应权限可能导致某些功能无法正常使用</string>
+    <string name="ardf_permission_setting_title">权限设置</string>
+    <string name="ardf_permission_setting_describe">应用需要该功能，请在设置中赋予其权限</string>
+</resources>
