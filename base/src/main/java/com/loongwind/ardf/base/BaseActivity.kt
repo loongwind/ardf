@@ -15,6 +15,13 @@ open class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCallbac
     EasyPermissions.RationaleCallbacks {
 
 
+    /**
+     * 权限申请
+     * @param permissions 要申请的权限列表
+     * @param showPermanentlyDeniedDialog 是否引导去应用设置赋予权限
+     * @param onDenied 授权拒绝回调
+     * @param onGranted 授权成功回调
+     */
     fun requestPermissions(
         permissions: Array<out String>,
         showPermanentlyDeniedDialog: Boolean = false,
@@ -25,8 +32,9 @@ open class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCallbac
     }
 
 
-
-
+    /**
+     * 权限申请结果回调
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -52,6 +60,9 @@ open class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCallbac
         PermissionHelper.onGranted(requestCode, perms)
     }
 
+    /**
+     * 跳转设置界面授权后返回结果处理
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         PermissionHelper.onActivityResult(this, requestCode, resultCode, data)

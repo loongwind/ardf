@@ -13,8 +13,10 @@ data class PermissionRequestModel(
 ) {
 
     companion object{
+        // 权限申请的请求 Code
         private var permissionsRequestCode = 20212
     }
 
+    // 请求 Code 每次在 permissionsRequestCode 上加 1
     val requestCode = permissionsRequestCode ++
 }
