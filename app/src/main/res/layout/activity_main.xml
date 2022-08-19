@@ -56,8 +56,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="api请求"
-            android:onClick="@{()->vm.onClick(MainViewModel.EVENT_API)}"
+            android:onClick="@{()->vm.getUser()}"
             app:layout_constraintTop_toTopOf="parent"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{vm.isLoading}"/>
 
 
     </LinearLayout>

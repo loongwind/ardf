@@ -48,7 +48,6 @@ dependencies {
 //    implementation 'com.loongwind.ardf:base:1.0.1'
 //    implementation project(path: ':recyclerview')
     implementation project(path: ':base')
-    implementation project(path: ':net')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

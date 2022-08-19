@@ -4,8 +4,12 @@ import androidx.databinding.Observable
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.loongwind.ardf.base.event.EVENT_BACK
 import com.loongwind.ardf.base.event.Event
+import com.loongwind.ardf.net.CoroutineLambda
+import com.loongwind.ardf.net.ErrorHandle
+import com.loongwind.ardf.net.request
 
 /**
  * @Description: ViewModel 基类，定义数据加载状态（isLoading）、提示信息（hintText/hintTextRes）、
@@ -55,11 +59,32 @@ open class BaseViewModel: ViewModel() {
         postEvent(EVENT_BACK)
     }
 
-    private fun showLoading(){
+    fun showLoading(){
         showLoadingCount.set(showLoadingCount.get() + 1)
     }
 
-    private fun dismissLoading(){
+    fun dismissLoading(){
         showLoadingCount.set(showLoadingCount.get() - 1)
     }
+
+
+    fun launch(
+        isShowLoading: Boolean = true,
+        onError: ErrorHandle? = null,
+        block: CoroutineLambda
+    ) {
+        request(coroutineScope = viewModelScope, error = { t ->
+            isLoading.value = false
+            onError?.invoke(t) == true
+        }) {
+            if(isShowLoading){
+                showLoading()
+            }
+            block()
+            if(isShowLoading){
+                dismissLoading()
+            }
+        }
+    }
+
 }

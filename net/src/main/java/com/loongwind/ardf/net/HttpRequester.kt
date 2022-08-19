@@ -3,6 +3,7 @@ package com.loongwind.ardf.net
 import kotlinx.coroutines.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+import org.koin.core.scope.Scope
 
 /**
  *Author: chengminghui
@@ -14,23 +15,10 @@ typealias ErrorHandle = (Throwable) -> Boolean
 typealias CoroutineLambda = suspend CoroutineScope.() -> Unit
 
 
-private fun request(block: CoroutineLambda) {
-    val exceptionHandle = CoroutineExceptionHandler { coroutineContext, throwable ->
-        throwable.printStackTrace()
-    }
-    GlobalScope.launch(exceptionHandle) {
-        withContext(Dispatchers.Main) {
-            block()
-        }
-    }
-
-
-}
-
-fun request(exceptionHandler: HttpExceptionHandler? = getHttpExceptionHandler(),
+fun request(coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main), exceptionHandler: HttpExceptionHandler? = getHttpExceptionHandler(),
             error: ErrorHandle? = null,
             block: CoroutineLambda) {
-    request {
+    coroutineScope.launch {
         try {
             block()
         } catch (e: Exception) {
