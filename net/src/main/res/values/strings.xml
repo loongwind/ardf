@@ -1,0 +1,7 @@
+<resources>
+    <string name="http_server_exception">服务异常</string>
+    <string name="http_connect_exception">连接异常</string>
+    <string name="http_data_exception">数据异常</string>
+    <string name="http_net_exception">网络异常</string>
+    <string name="http_ssl_exception">证书异常</string>
+</resources>

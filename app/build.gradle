@@ -37,16 +37,18 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation "androidx.core:core-ktx:${versions.core_ktx}"
+    implementation "androidx.appcompat:appcompat:${versions.appcompat}"
     implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
     implementation 'com.loongwind.ardf:recyclerview-ext:1.0.1'
+    api "com.squareup.okhttp3:okhttp:4.9.3"
 //    implementation 'com.loongwind.ardf:base:1.0.1'
 //    implementation project(path: ':recyclerview')
     implementation project(path: ':base')
+    implementation project(path: ':net')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

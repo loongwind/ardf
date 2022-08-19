@@ -19,3 +19,4 @@ rootProject.name = "AndroidFramework"
 include ':app'
 include ':recyclerview'
 include ':base'
+include ':net'

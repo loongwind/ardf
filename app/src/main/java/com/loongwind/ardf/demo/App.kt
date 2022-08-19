@@ -1,6 +1,7 @@
 package com.loongwind.ardf.demo
 
 import android.app.Application
+import com.loongwind.ardf.net.retrofitModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -16,6 +17,7 @@ class App : Application() {
             androidLogger()
             androidContext(this@App)
             modules(appModule)
+            modules(retrofitModule)
         }
     }
 }

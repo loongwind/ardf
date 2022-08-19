@@ -51,6 +51,13 @@
             android:text="多类型item view"
             android:onClick="@{()->vm.onClick(MainViewModel.EVENT_MULTI_ITEM_VIEW)}"
             app:layout_constraintTop_toTopOf="parent"/>
+        <Button
+            android:id="@+id/api"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="api请求"
+            android:onClick="@{()->vm.onClick(MainViewModel.EVENT_API)}"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
     </LinearLayout>
