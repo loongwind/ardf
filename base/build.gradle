@@ -43,7 +43,8 @@ dependencies {
     api "io.insert-koin:koin-core:${versions.koin}"
     api "io.insert-koin:koin-android:${versions.koin}"
     api "pub.devrel:easypermissions:${versions.easypermissions}"
-    api project(path: ':net')
+//    api project(path: ':net')
+    api 'com.loongwind.ardf:net:1.2.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
