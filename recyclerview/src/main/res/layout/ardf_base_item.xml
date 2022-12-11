@@ -9,6 +9,9 @@
         <variable
             name="handler"
             type="Object" />
+        <variable
+            name="position"
+            type="int" />
 
     </data>
 

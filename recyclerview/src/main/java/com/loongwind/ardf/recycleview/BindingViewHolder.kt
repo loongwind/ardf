@@ -14,4 +14,8 @@ class BindingViewHolder<T, BINDING : ViewDataBinding>(val binding: BINDING)
         binding.setVariable(BR.handler, handler)
     }
 
+    fun setItemPosition(position:Int){
+        binding.setVariable(BR.position, position)
+    }
+
 }

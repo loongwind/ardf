@@ -64,6 +64,7 @@ abstract class BaseBindingAdapter<T:Any, BINDING : ViewDataBinding> :
     override fun onBindViewHolder(holder: BindingViewHolder<T, BINDING>, position: Int) {
         holder.bind(getItem(position))
         holder.setItemEventHandler(itemEventHandler)
+        holder.setItemPosition(position)
     }
 
     override fun getItemCount(): Int {
