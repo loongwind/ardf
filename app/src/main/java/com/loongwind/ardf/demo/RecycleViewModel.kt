@@ -1,10 +1,12 @@
 package com.loongwind.ardf.demo
 
 import androidx.databinding.ObservableArrayList
+import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.loongwind.ardf.base.BaseViewModel
 
 class RecycleViewModel : BaseViewModel(){
     val data = ObservableArrayList<String>()
+    val itemDecorations = listOf<ItemDecoration>(CustomItemDecoration(), CustomItemDecoration2())
 
     init {
         for (i in 0..5){

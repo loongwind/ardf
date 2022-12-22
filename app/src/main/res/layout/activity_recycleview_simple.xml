@@ -23,7 +23,8 @@
             app:layout_constraintBottom_toTopOf="@+id/add_item"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:data="@{vm.data}"
-            app:itemLayout="@{@layout/layout_item}"/>
+            app:itemLayout="@{@layout/layout_item}"
+            app:itemDecorations="@{vm.itemDecorations}"/>
 
         <Button
             android:id="@+id/add_item"
