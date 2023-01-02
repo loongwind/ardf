@@ -24,7 +24,10 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:data="@{vm.data}"
             app:itemLayout="@{@layout/layout_item}"
-            app:itemDecorations="@{vm.itemDecorations}"/>
+            app:itemDecorations="@{vm.itemDecorations}"
+            app:dividerSize="@{@dimen/divider_size}"
+            app:dividerLeftPadding="@{@dimen/divider_padding}"
+            app:dividerRightPadding="@{@dimen/divider_padding}"/>
 
         <Button
             android:id="@+id/add_item"

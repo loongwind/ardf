@@ -22,7 +22,10 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:data="@{vm.data}"
             app:itemLayout="@{@layout/layout_item_click}"
-            app:itemClick="@{(item,position)-> vm.onItemClick(item)}"/>
+            app:itemClick="@{(item,position)-> vm.onItemClick(item)}"
+            app:dividerSize="@{@dimen/divider_size}"
+            app:dividerLeftPadding="@{@dimen/divider_padding}"
+            app:dividerRightPadding="@{@dimen/divider_padding}"/>
 
 
 

@@ -10,7 +10,7 @@ has recyclerview-ext、base library
 `build.gradle` add library
 ```groovy
  dependencies {
-    implementation 'com.loongwind.ardf:recyclerview-ext:1.2.1'
+    implementation 'com.loongwind.ardf:recyclerview-ext:1.2.2'
     implementation 'com.loongwind.ardf:base:1.2.0'
     implementation 'com.loongwind.ardf:net:1.2.0'
 }

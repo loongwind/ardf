@@ -1,3 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="divider_size">10dp</dimen>
+    <dimen name="divider_padding">30dp</dimen>
 </resources>
