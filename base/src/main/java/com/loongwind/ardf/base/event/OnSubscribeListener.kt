@@ -6,7 +6,7 @@ package com.loongwind.ardf.base.event
  * @CreateDate： 2020/8/13 6:23 AM
  *
  */
-interface OnEventListener {
+interface OnSubscribeListener {
     /**
      *
      * @description ViewModel 事件响应
@@ -14,5 +14,5 @@ interface OnEventListener {
      * @return
      *
      */
-    fun onEvent(eventId:Int)
+    fun onSubscribe(event:Any)
 }

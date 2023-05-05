@@ -8,10 +8,12 @@ import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import com.loongwind.ardf.base.BaseViewModel
+import com.loongwind.ardf.base.Subscribe
 import org.koin.android.ext.android.getKoinScope
 import org.koin.androidx.viewmodel.ext.android.getViewModelFactory
 import org.koin.core.annotation.KoinInternalApi
 import org.koin.core.scope.Scope
+import java.lang.reflect.Method
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -79,4 +81,14 @@ fun getViewModel(javaClass : Class<*>,
         ViewModelLazy(it.kotlin, { viewModelStore }, { viewModelFactory} ).value
     }
     return viewModel
+}
+
+fun getSubscribeMethods(javaClass : Class<*>) : Map<Class<*>, Method>{
+    return javaClass.methods.filter { method ->
+        method.getAnnotation(Subscribe::class.java) != null
+    }.filter { method ->
+        method.parameterTypes.size == 1
+    }.associateBy { method ->
+        method.parameterTypes[0]
+    }
 }

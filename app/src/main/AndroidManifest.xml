@@ -29,6 +29,12 @@
         </activity>
 
         <activity
+            android:name=".TestActivity"
+            android:exported="false"
+            android:label="@string/title_activity_recycle_view_simple"
+            android:theme="@style/Theme.AndroidFramework.NoActionBar" />
+
+        <activity
             android:name=".RecycleViewSimpleActivity"
             android:exported="false"
             android:label="@string/title_activity_recycle_view_simple"

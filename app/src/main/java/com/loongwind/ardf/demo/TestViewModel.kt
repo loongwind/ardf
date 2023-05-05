@@ -2,6 +2,8 @@ package com.loongwind.ardf.demo
 
 import com.loongwind.ardf.base.BaseViewModel
 
+data class ShowDialogEvent(val title:String, val content:String)
+
 class TestViewModel : BaseViewModel(){
     val text = "Hello ardf ViewModel"
 
@@ -34,6 +36,7 @@ class TestViewModel : BaseViewModel(){
 
     fun showDialog(){
         // 发送弹出 Dialog 事件
-        postEvent(EVENT_SHOW_DIALOG)
+//        postEvent(EVENT_SHOW_DIALOG)
+        postEvent(ShowDialogEvent("Dialog", "this is dialog event"))
     }
 }

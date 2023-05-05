@@ -7,7 +7,7 @@ package com.loongwind.ardf.base.event
  * @CreateDate： 2020/8/13 6:27 AM
  *
  */
-class Event<T>(private val value: T) {
+internal class Event<T>(private val value: T) {
 
     //是否已被处理
     private var handled = false
@@ -36,3 +36,7 @@ const val EVENT_BACK = 0xff
 const val EVENT_CLICK = 0x100
 //列表 item 点击事件
 const val EVENT_ITEM_CLICK = 0x101
+
+internal class BackEvent
+internal class ToastRes(val msgRes : Int)
+internal class ToastString(val msg : String)

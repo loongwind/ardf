@@ -6,6 +6,9 @@ import androidx.lifecycle.LifecycleOwner
 import com.loongwind.ardf.base.BaseBindingViewModelActivity
 import com.loongwind.ardf.base.BaseBindingViewModelFragment
 import com.loongwind.ardf.base.BaseViewModel
+import com.loongwind.ardf.base.event.BackEvent
+import com.loongwind.ardf.base.event.ToastRes
+import com.loongwind.ardf.base.event.ToastString
 
 /**
  *
@@ -15,9 +18,9 @@ import com.loongwind.ardf.base.BaseViewModel
  * @return
  *
  */
-fun BaseViewModel.bind(activity: BaseBindingViewModelActivity<*,*>) {
-    observe(activity, activity){
-        activity.onEvent(it)
+internal fun BaseViewModel.bind(activity: BaseBindingViewModelActivity<*,*>) {
+    observe(activity){
+        activity.onSubscribe(it)
     }
 }
 
@@ -29,33 +32,50 @@ fun BaseViewModel.bind(activity: BaseBindingViewModelActivity<*,*>) {
  * @return
  *
  */
-fun BaseViewModel.bind(fragment: BaseBindingViewModelFragment<*, *>) {
-    observe(fragment, fragment.context){
-        fragment.onEvent(it)
+internal fun BaseViewModel.bind(fragment: BaseBindingViewModelFragment<*, *>) {
+    observe(fragment){
+        fragment.onSubscribe(it)
     }
 }
 
 
-fun  BaseViewModel.observe( owner: LifecycleOwner, context: Context?, onEvent: (Int) -> Unit){
-    // 订阅提示文字变化
-    hintText.observe(owner){
-        val content = hintText.value?.getValueIfNotHandled()
-        if (!content.isNullOrBlank()) {
-            context?.toast(content)
-        }
-    }
-    // 订阅提示文字资源变化
-    hintTextRes.observe(owner) {
-        val contentRes = hintTextRes.value?.getValueIfNotHandled() ?: -1
-        if (contentRes > 0) {
-            context?.toast(contentRes)
-        }
-    }
-
+private fun  BaseViewModel.observe( owner: LifecycleOwner, onEvent: (Any) -> Unit){
     // 订阅事件变化
     event.observe(owner) {
         event.value?.getValueIfNotHandled()?.let {
             onEvent(it)
         }
     }
+}
+
+internal fun BaseBindingViewModelActivity<*,*>.subscribe(event:Any) : Boolean{
+    if(!subscribe(this, event){
+            onEvent(it)
+        }){
+        return if(event is BackEvent){
+            onBackPressed()
+            true
+        }else{
+            false
+        }
+    }
+    return true
+}
+internal fun BaseBindingViewModelFragment<*,*>.subscribe(event:Any) : Boolean{
+    return subscribe(context, event){
+        onEvent(it)
+    }
+}
+
+private fun subscribe(context: Context?, event: Any, onEvent: (Int) -> Unit) : Boolean{
+    when (event) {
+        is Int -> {
+            onEvent(event)
+            return false
+        }
+        is ToastRes -> context?.toast(event.msgRes)
+        is ToastString -> context?.toast(event.msg)
+        else -> return false
+    }
+    return true
 }

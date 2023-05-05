@@ -13,6 +13,7 @@ class MainViewModel : BaseViewModel() , KoinComponent{
         const val EVENT_ITEM_CLICK = 0x01
         const val EVENT_ITEM_EVENT = 0x02
         const val EVENT_MULTI_ITEM_VIEW = 0x03
+        const val EVENT_TEST = 0x04
     }
 
 

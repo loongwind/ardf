@@ -1,11 +1,15 @@
 package com.loongwind.ardf.base
 
 
+import android.os.Bundle
 import androidx.databinding.ViewDataBinding
 import com.loongwind.ardf.base.event.EVENT_BACK
-import com.loongwind.ardf.base.event.OnEventListener
+import com.loongwind.ardf.base.event.OnSubscribeListener
 import com.loongwind.ardf.base.ext.bind
+import com.loongwind.ardf.base.ext.subscribe
+import com.loongwind.ardf.base.utils.getSubscribeMethods
 import com.loongwind.ardf.base.utils.injectViewModel
+import java.lang.reflect.Method
 
 /**
  * @Description: Databinding + ViewModel BaseActivity
@@ -14,9 +18,14 @@ import com.loongwind.ardf.base.utils.injectViewModel
  *
  */
 open class BaseBindingViewModelActivity<BINDING : ViewDataBinding, VM : BaseViewModel>:
-    BaseBindingActivity<BINDING>(), OnEventListener {
+    BaseBindingActivity<BINDING>(), OnSubscribeListener {
 
+    internal lateinit var subscribeMethodMap : Map<Class<*>, Method>
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        registerSubscribe()
+    }
 
     //创建 ViewModel 变量并延迟初始化
     val viewModel:VM by lazy {
@@ -31,9 +40,16 @@ open class BaseBindingViewModelActivity<BINDING : ViewDataBinding, VM : BaseView
 
     }
 
-    override fun  onEvent(eventId: Int) {
+    open fun onEvent(eventId: Int) {
         if(eventId == EVENT_BACK){
             onBackPressed()
+        }
+    }
+    override fun  onSubscribe(event: Any) {
+        val eventType = event.javaClass
+        val method = subscribeMethodMap[eventType]
+        if(!subscribe(event)){
+            method?.invoke(this, event)
         }
     }
 
@@ -51,5 +67,9 @@ open class BaseBindingViewModelActivity<BINDING : ViewDataBinding, VM : BaseView
             // 抛出异常
             throw Exception("ViewModel is not inject", e)
         }
+    }
+
+    private fun registerSubscribe(){
+        subscribeMethodMap = getSubscribeMethods(javaClass)
     }
 }

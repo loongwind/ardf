@@ -1,14 +1,21 @@
 package com.loongwind.ardf.base
 
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelStoreOwner
-import com.loongwind.ardf.base.event.OnEventListener
+import com.loongwind.ardf.base.event.OnSubscribeListener
 import com.loongwind.ardf.base.ext.bind
+import com.loongwind.ardf.base.ext.subscribe
+import com.loongwind.ardf.base.utils.getSubscribeMethods
 import com.loongwind.ardf.base.utils.getViewModel
 import org.koin.android.ext.android.getKoinScope
 import org.koin.core.annotation.KoinInternalApi
 import org.koin.core.scope.Scope
+import java.lang.reflect.Method
 
 /**
  * @Description: Databinding + ViewModel BaseFragment
@@ -17,9 +24,20 @@ import org.koin.core.scope.Scope
  *
  */
 open class BaseBindingViewModelFragment<BINDING : ViewDataBinding, VM : BaseViewModel>:
-    BaseBindingFragment<BINDING>(), OnEventListener {
+    BaseBindingFragment<BINDING>(), OnSubscribeListener {
     val viewModel:VM by lazy {
         createViewModel()
+    }
+
+    internal lateinit var subscribeMethodMap : Map<Class<*>, Method>
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        registerSubscribe()
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun initDataBinding(binding: BINDING) {
@@ -58,7 +76,15 @@ open class BaseBindingViewModelFragment<BINDING : ViewDataBinding, VM : BaseView
         }
     }
 
-    override fun onEvent(eventId: Int) {
+    open fun onEvent(eventId: Int) {
+    }
+
+    override fun  onSubscribe(event: Any) {
+        val eventType = event.javaClass
+        val method = subscribeMethodMap[eventType]
+        if(!subscribe(event)){
+            method?.invoke(this, event)
+        }
     }
 
 
@@ -73,5 +99,9 @@ open class BaseBindingViewModelFragment<BINDING : ViewDataBinding, VM : BaseView
      */
     open fun isShareViewModel():Boolean{
         return false
+    }
+
+    private fun registerSubscribe(){
+        subscribeMethodMap = getSubscribeMethods(javaClass)
     }
 }

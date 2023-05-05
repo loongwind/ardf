@@ -5,8 +5,9 @@ import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.loongwind.ardf.base.event.EVENT_BACK
-import com.loongwind.ardf.base.event.Event
+import com.loongwind.ardf.base.event.*
+import com.loongwind.ardf.base.event.ToastRes
+import com.loongwind.ardf.base.event.ToastString
 import com.loongwind.ardf.net.CoroutineLambda
 import com.loongwind.ardf.net.ErrorHandle
 import com.loongwind.ardf.net.request
@@ -19,15 +20,10 @@ import com.loongwind.ardf.net.request
  *
  */
 open class BaseViewModel: ViewModel() {
-    var isLoading = MutableLiveData<Boolean>()
+    val isLoading = MutableLiveData<Boolean>()
     private var showLoadingCount = ObservableInt(0)
-    // 提示文字
-    var hintText = MutableLiveData<Event<String>>()
-    // 提示文字资源
-    var hintTextRes = MutableLiveData<Event<Int>>()
-
     // 事件
-    var event = MutableLiveData<Event<Int>>()
+    internal val event = MutableLiveData<Event<*>>()
 
     init {
         showLoadingCount.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback(){
@@ -41,22 +37,23 @@ open class BaseViewModel: ViewModel() {
     }
 
     protected fun postHintText(msg: String) {
-        hintText.value = Event(msg)
+        postEvent(ToastString(msg))
     }
 
     protected fun postHintText(msgRes: Int) {
-        hintTextRes.value = Event(msgRes)
+//        hintTextRes.value =
+        postEvent(ToastRes(msgRes))
     }
 
-    protected fun postEvent(eventId: Int) {
-        event.value = Event(eventId)
+    protected fun postEvent(content: Any) {
+        event.value = Event(content)
     }
 
     /**
      * 返回事件
      */
     fun back(){
-        postEvent(EVENT_BACK)
+        postEvent(BackEvent())
     }
 
     fun showLoading(){
