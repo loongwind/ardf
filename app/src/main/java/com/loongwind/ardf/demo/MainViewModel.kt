@@ -1,6 +1,7 @@
 package com.loongwind.ardf.demo
 
 import com.loongwind.ardf.base.BaseViewModel
+import com.loongwind.ardf.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

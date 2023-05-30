@@ -89,7 +89,7 @@ fun setDivider(
         if(insetDrawable is InsetDrawable){
             val shapeDrawable = insetDrawable.drawable
             if(shapeDrawable is GradientDrawable){
-                shapeDrawable.setColor(dividerColor ?: recyclerView.context.resources.getColor(R.color.ardf_recyclerview_divider_color, null))
+                shapeDrawable.setColor(dividerColor ?: recyclerView.context.resources.getColor(R.color.ardf_recyclerview_divider_color))
                 val width = if (orientation == DividerItemDecoration.VERTICAL) LayoutParams.MATCH_PARENT else dividerSize ?: recyclerView.context.resources.getDimensionPixelSize(R.dimen.ardf_recyclerview_divider_size)
                 val height = if (orientation == DividerItemDecoration.HORIZONTAL) LayoutParams.MATCH_PARENT else dividerSize ?: recyclerView.context.resources.getDimensionPixelSize(R.dimen.ardf_recyclerview_divider_size)
                 shapeDrawable.setSize(width.toInt(), height.toInt())
