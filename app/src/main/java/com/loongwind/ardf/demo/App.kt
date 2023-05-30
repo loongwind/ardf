@@ -8,6 +8,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.module
+import org.koin.ksp.generated.module
 
 class App : Application() {
 
@@ -17,7 +18,7 @@ class App : Application() {
             androidLogger()
             androidContext(this@App)
             modules(appModule)
-            modules(retrofitModule)
+            modules(retrofitModule, AppModule().module)
         }
     }
 }

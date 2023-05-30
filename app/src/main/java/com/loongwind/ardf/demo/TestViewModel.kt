@@ -1,9 +1,11 @@
 package com.loongwind.ardf.demo
 
 import com.loongwind.ardf.base.BaseViewModel
+import org.koin.android.annotation.KoinViewModel
 
 data class ShowDialogEvent(val title:String, val content:String)
 
+@KoinViewModel
 class TestViewModel : BaseViewModel(){
     val text = "Hello ardf ViewModel"
 

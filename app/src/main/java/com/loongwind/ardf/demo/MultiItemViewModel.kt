@@ -3,7 +3,9 @@ package com.loongwind.ardf.demo
 import androidx.databinding.ObservableArrayList
 import com.loongwind.ardf.base.BaseViewModel
 import com.loongwind.ardf.recycleview.BaseBindingAdapter
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class MultiItemViewModel : BaseViewModel(){
     // List 的 item 数据类型改为 Any
     val data = ObservableArrayList<Any>()

@@ -2,9 +2,11 @@ package com.loongwind.ardf.demo
 
 import com.loongwind.ardf.base.BaseViewModel
 import com.loongwind.ardf.launch
+import org.koin.android.annotation.KoinViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
+@KoinViewModel
 class MainViewModel : BaseViewModel() , KoinComponent{
 
     private val apiService:ApiService by inject()

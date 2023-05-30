@@ -17,12 +17,12 @@ has recyclerview-ext、base library
 `build.gradle` add library
 ```groovy
  dependencies {
-    implementation 'com.loongwind.ardf:base:1.3.0'
-    implementation 'com.loongwind.ardf:net:1.3.0'
-    implementation 'com.loongwind.ardf:recyclerview-ext:1.3.0'
+    implementation 'com.loongwind.ardf:base:$lastVersion'
+    implementation 'com.loongwind.ardf:net:$lastVersion'
+    implementation 'com.loongwind.ardf:recyclerview-ext:$lastVersion'
     
     // or
-    implementation 'com.loongwind.ardf:ardf:1.3.0'
+    implementation 'com.loongwind.ardf:ardf:$lastVersion'
 }
 ```
 
