@@ -1,10 +1,17 @@
-
-
 ## Features
 
 android rapid development framework
 
 has recyclerview-ext、base library
+
+## Current Version
+
+| Project                          |                                                                          Version                                                                           |
+|----------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| ardf                             |       [![Maven Central](https://img.shields.io/maven-central/v/com.loongwind.ardf/ardf)](https://mvnrepository.com/artifact/com.loongwind.ardf/ardf)       |
+| base                             |       [![Maven Central](https://img.shields.io/maven-central/v/com.loongwind.ardf/base)](https://mvnrepository.com/artifact/com.loongwind.ardf/base)       |
+| recyclerview-ext                 | [![Maven Central](https://img.shields.io/maven-central/v/com.loongwind.ardf/recyclerview-ext)](https://mvnrepository.com/artifact/com.loongwind.ardf/recyclerview-ext) |
+| net                              |        [![Maven Central](https://img.shields.io/maven-central/v/com.loongwind.ardf/net)](https://mvnrepository.com/artifact/com.loongwind.ardf/net)        |
 
 ## Getting started
 `build.gradle` add library
