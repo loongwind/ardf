@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import com.loongwind.ardf.base.event.OnSubscribeListener
 import com.loongwind.ardf.base.ext.bind
@@ -58,17 +59,20 @@ open class BaseBindingViewModelFragment<BINDING : ViewDataBinding, VM : BaseView
 
         val scope : Scope?
         val owner: ViewModelStoreOwner?
+        val vmStore : ViewModelStore?
 
         val activity = this.activity ?: throw Exception("Fragment Activity is null")
         if(isShareViewModel()){
             scope = activity.getKoinScope()
             owner =  activity
+            vmStore = activity.viewModelStore
         }else{
             scope = getKoinScope()
             owner = this
+            vmStore = this.viewModelStore
         }
         try {
-            val viewModel = getViewModel(javaClass, scope, owner, viewModelStore) as VM
+            val viewModel = getViewModel(javaClass, scope, owner, vmStore) as VM
             viewModel.bind(this)
             return viewModel
         } catch (e: Exception) {
