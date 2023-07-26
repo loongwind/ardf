@@ -85,7 +85,7 @@ fun setDivider(
         || dividerBottomPadding != null){
         val orientation = dividerOrientation ?: DividerItemDecoration.VERTICAL
         val dividerItemDecoration = DividerItemDecoration(recyclerView.context, orientation)
-        var insetDrawable = recyclerView.context.resources.getDrawable(R.drawable.ardf_recyclerview_divider, null)
+        var insetDrawable = recyclerView.context.resources.getDrawable(R.drawable.ardf_recyclerview_divider, null).mutate()
         if(insetDrawable is InsetDrawable){
             val shapeDrawable = insetDrawable.drawable
             if(shapeDrawable is GradientDrawable){
