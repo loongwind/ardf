@@ -81,9 +81,11 @@ abstract class BaseBindingAdapter<T:Any, BINDING : ViewDataBinding> :
 
 
     protected fun bindClick(holder: BindingViewHolder<*, *>, binding: BINDING) {
-        binding.root.setOnClickListener {
-            val position = holder.layoutPosition
-            itemClickListener?.onItemClick(getItem(position), position)
+        itemClickListener?.let {
+            binding.root.setOnClickListener {
+                val position = holder.layoutPosition
+                itemClickListener?.onItemClick(getItem(position), position)
+            }
         }
     }
 
