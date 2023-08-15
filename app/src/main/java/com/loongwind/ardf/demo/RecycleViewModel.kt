@@ -11,10 +11,16 @@ class RecycleViewModel : BaseViewModel(){
     val itemDecorations = listOf<ItemDecoration>(CustomItemDecoration(), CustomItemDecoration2())
 
     init {
-        for (i in 0..5){
-            data.add("Item $i")
-            println(data)
+        loadData()
+    }
+
+    private fun loadData() {
+        val list = arrayListOf<String>()
+        for (i in 0..20) {
+            list.add("Item $i")
+            println(list)
         }
+        data.addAll(list)
     }
 
     fun onItemClick(item:Any?){
@@ -34,4 +40,10 @@ class RecycleViewModel : BaseViewModel(){
     fun eventDeleteItem(item:String){
         data.remove(item)
     }
+
+    fun refreshData(){
+        data.clear()
+        loadData()
+    }
+
 }

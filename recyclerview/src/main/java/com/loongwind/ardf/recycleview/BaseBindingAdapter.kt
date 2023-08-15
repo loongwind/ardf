@@ -23,21 +23,21 @@ abstract class BaseBindingAdapter<T:Any, BINDING : ViewDataBinding> :
     var data: List<T>? = null
         @SuppressLint("NotifyDataSetChanged")
         set(data) {
+            val oldData = field
             field = data
             // 判断如果是 ObservableList 类型，则为其添加 changeCallback 回调
             if (data is ObservableList<*>) {
                 // 如果 listener 为空则创建 ObserverListChangeListener 对象，传入当前 Adapter
-                if (listener == null) {
+                if (listener == null || oldData != data) {
                     listener = ObserverListChangeListener(this)
+                    notifyDataSetChanged()
+                    (data as? ObservableList<T>)?.addOnListChangedCallback(listener)
                 }
-                // 将已添加的 listener 移除，防止添加多个导致重复回调
-                (data as ObservableList<T>).removeOnListChangedCallback(listener)
-
-                // 设置 List 数据改变回调
-                data.addOnListChangedCallback(listener)
+            }else{
+                // 刷新界面数据
+                notifyDataSetChanged()
             }
-            // 刷新界面数据
-            notifyDataSetChanged()
+
         }
 
 
@@ -46,6 +46,10 @@ abstract class BaseBindingAdapter<T:Any, BINDING : ViewDataBinding> :
 
     fun getItem(position: Int): T? {
         return data?.getOrNull(position)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder<T, BINDING> {

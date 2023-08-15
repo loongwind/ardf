@@ -31,6 +31,7 @@ fun setData(
         simpleBindingAdapter.itemClickListener = listener
         simpleBindingAdapter.itemViewTypeCreator = itemViewTypeCreator
         simpleBindingAdapter.itemEventHandler = itemEventHandler
+        simpleBindingAdapter.setHasStableIds(true)
         recyclerView.adapter = simpleBindingAdapter
     } else if (adapter is BaseBindingAdapter<*, *>) {
         (adapter as BaseBindingAdapter<Any, ViewDataBinding>).data = data

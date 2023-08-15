@@ -27,12 +27,23 @@
             app:itemEventHandler="@{vm}"/>
 
         <Button
-            android:id="@+id/add_item"
+            android:id="@+id/refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintRight_toLeftOf="@id/add_item"
+            android:text="刷新"
+            android:onClick="@{()->vm.refreshData()}"/>
+
+        <Button
+            android:id="@+id/add_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/refresh"
             android:layout_marginBottom="20dp"
             app:layout_constraintRight_toLeftOf="@id/del_item"
             android:text="添加item"
